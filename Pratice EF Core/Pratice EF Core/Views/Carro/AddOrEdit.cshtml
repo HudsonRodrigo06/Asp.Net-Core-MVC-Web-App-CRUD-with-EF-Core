@@ -1,0 +1,45 @@
+﻿@model Pratice_EF_Core.Models.Carro
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="AddOrEdit" asp-route-id ="@Model.CarroId" onsubmit="return jQueryAjaxPost(this);" autocomplete="off">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CarroId" />
+            <div class="form-row">
+                <div class="col-md-6 form-group">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="Valor" class="control-label"></label>
+                    <input asp-for="Valor" class="form-control" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+                
+                <div class="form-row mb-4">
+                    <div class="form-group ml-2">
+                        <input type="submit" value="Gravar" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group ml-1">
+                        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table mr-1"></i>Voltar para lista</a>
+                    </div>
+                </div>
+
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

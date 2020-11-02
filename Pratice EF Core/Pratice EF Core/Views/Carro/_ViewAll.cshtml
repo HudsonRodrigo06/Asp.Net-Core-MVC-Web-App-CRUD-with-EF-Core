@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Pratice_EF_Core.Models.Carro>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit", "Carro", null, Context.Request.Scheme)', 'Cadastrar Carro')" class="btn btn-outline-success"><i class="fa fa-plus-circle mr-1"></i>Carro</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    <a  onclick="showInPopup('@Url.Action("AddOrEdit", "Carro", new { id = item.CarroId }, Context.Request.Scheme)', 'Editar Dados')" ><i class="fa fa-marker fa-lg"></i></a> |
+                  
+                    <form asp-action="Delete" asp-route-id="@item.CarroId" onsubmit="return jQueryAjaxDelete(this)"  class="d-inline">
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Pratice_EF_Core.Models.Carro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="view-all">
+    @await Html.PartialAsync("_ViewAll", Model) 
+</div>
+

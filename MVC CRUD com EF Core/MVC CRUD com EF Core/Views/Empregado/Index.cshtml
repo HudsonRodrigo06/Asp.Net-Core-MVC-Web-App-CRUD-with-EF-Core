@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MVC_CRUD_com_EF_Core.Models.Empregado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Cadastrar Empregado</h1>
+<hr />
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocalTrabalho)
+            </th>
+            <th><a class="btn btn-outline-success" asp-action="AddOrEdit"><i class="fa fa-plus-square"></i> Empregado</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalTrabalho)
+                </td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-route-id="@item.EmpregadoId"><i class="fa fa-marker fa-lg"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.EmpregadoId" class="text-danger ml-1" onclick="return confirm('Cinfirma exclusão deste registro?')"><i class="fa fa-trash-alt fa-lg"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
