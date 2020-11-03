@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Pratice_EF_Core.Models;
+using static Pratice_EF_Core.Helper;
 
 namespace Pratice_EF_Core.Controllers
 {
+    [Authorize] // Bloqueia se não estiver logado
     public class CarroController : Controller
     {
         private readonly CarroContext _context;
@@ -24,24 +27,9 @@ namespace Pratice_EF_Core.Controllers
             return View(await _context.Carros.ToListAsync());
         }
 
-        // GET: Carro/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+       
 
-            var carro = await _context.Carros
-                .FirstOrDefaultAsync(m => m.CarroId == id);
-            if (carro == null)
-            {
-                return NotFound();
-            }
-
-            return View(carro);
-        }
-
+        [NoDirectAccess]
         // GET: Carro/AddOrEdit/5
         public async Task<IActionResult> AddOrEdit(int id=0)
         {

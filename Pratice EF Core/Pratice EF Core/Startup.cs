@@ -48,13 +48,17 @@ namespace Pratice_EF_Core
 
 			app.UseRouting();
 
+
+			app.UseAuthentication();//
 			app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllerRoute(
 					name: "default",
-					pattern: "{controller=Carro}/{action=Index}/{id?}");
+					pattern: "{controller=Home}/{action=Index}/{id?}");
+
+				endpoints.MapRazorPages();//
 			});
 		}
 	}

@@ -1,4 +1,14 @@
-﻿
+﻿$(function () {
+	$("#loaderbody").addClass('hide');
+
+	$(document).bind('ajaxStart', function () {
+		$("#loaderbody").removeClass('hide');
+	}).bind('ajaxStop', function () {
+		$("#loaderbody").addClass('hide');
+	});
+});
+
+
 showInPopup = (url, title) => {
 
 	$.ajax({
@@ -10,24 +20,6 @@ showInPopup = (url, title) => {
 			$('#form-modal').modal('show');
 		}
 	})
-
-}
-
-jQueryAjaxPostTest = async (url, obj) => {
-
-	let config = {
-		method: "POST",
-		body: JSON.stringify(obj),
-		headers: {
-			"Content-Type": "application/json"
-		}
-	}
-
-	let p = await fetch(url, config);
-
-	HTTPClient.toggleLoading();
-
-	return p;
 }
 
 jQueryAjaxPost = (form) => {
@@ -50,6 +42,7 @@ jQueryAjaxPost = (form) => {
 					$('#form-modal .modal-body').html('');
 					$('#form-modal .modal-title').html('');
 					$('#form-modal').modal('hide');
+					$.notify('Enviado com sucesso!', { globalPosition: 'top center', className : 'success' });
 				}
 				else
 					$('#form-modal .modal-body').html(response.html);
@@ -85,6 +78,7 @@ jQueryAjaxDelete = (form) => {
 
 				// chama view all
 				$('#view-all').html(response.html);
+				$.notify('Deletado com sucesso!', { globalPosition: 'top center', className : 'success' });
 			},
 			error: (err) => {
 				console.log(err);
